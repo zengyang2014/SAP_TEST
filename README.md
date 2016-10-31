@@ -1,2 +1,2 @@
 # SAP_TEST
-This is a ability of programming from SAP
+This is a ability test of programming from SAP
