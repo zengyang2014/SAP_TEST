@@ -9,21 +9,21 @@ package mainClass;
 
 import java.awt.event.*;
 
-import mainUI.*;
+import userInterface.*;
 /**
  * @author Yang
  *
  */
 public class Main {
 	
-	private static MainUI mainUI;
+	private static UserInterface mainUI;
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		mainUI = new OriginalMainUI();
-		mainUI.createMainUI();
+		mainUI.createUI();
 		
 	}
 	
