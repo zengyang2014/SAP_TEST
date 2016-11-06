@@ -4,9 +4,13 @@
 package userInterface;
 
 import java.awt.Color;
+import java.io.File;
+import java.util.Vector;
 
 import javax.swing.*;
 import javax.swing.table.*;
+
+import fileSearchClass.*;
 
 /**
  * @author Yang
@@ -27,20 +31,31 @@ public class SearchUI extends JFrame implements UserInterface {
 	/*the column names of search result, including "filename" and "folder"*/
 	private static final Object[] COLUMNNAMES = {"Filename","Folder"};
 	
-	public void createUI()
+	private JTable filelistview;
+	private DefaultTableModel tablemode;
+	
+	private String folderRoute;
+	private String keyWord;
+	private SearchByKeyWord searchbykeyword;
+	
+	public SearchUI(String folderRoute, String keyWord)
 	{
-		
-		
+		this.folderRoute = folderRoute;
+		this.keyWord = keyWord;
+	}
+	
+	public void createUI()
+	{	
 		JScrollPane content = new JScrollPane();
 		
-		DefaultTableModel tablemode = new DefaultTableModel(COLUMNNAMES,0){
+		tablemode = new DefaultTableModel(COLUMNNAMES,0){
 			public boolean isCellEditable(int row, int column)
 			{
 				return false;
 			}
 		};
 		
-		JTable filelistview = new JTable(tablemode);
+		filelistview = new JTable(tablemode);
 		initialTableStyle(filelistview);
 		filelistview.doLayout();
 		initialTable();
@@ -61,7 +76,15 @@ public class SearchUI extends JFrame implements UserInterface {
 	/*initial the data of table*/
 	private void initialTable()
 	{
-		
+		searchbykeyword = new SearchByKeyWord(folderRoute, keyWord);
+		Vector<File> searchresults = searchbykeyword.getSearchResult();
+		for(int i = 0; i < searchresults.size(); i++)
+		{
+			Object[] rowData = new Object[2];
+			rowData[1] = searchresults.get(i).getPath();
+			rowData[0] = searchresults.get(i).getName();
+			tablemode.addRow(rowData);
+		}
 	}
 	
 	/**/

@@ -24,7 +24,9 @@ public class OriginalMainUI extends JPanel implements UserInterface {
 	/*The top container*/
 	private JFrame mainFrame;
 	/*store the folder route*/
-	private String folderRoute = new String();
+	//private String folderRoute = new String();
+	private JTextField keywordText;
+	
 	
 	@Override
 	public void createUI() {
@@ -82,8 +84,8 @@ public class OriginalMainUI extends JPanel implements UserInterface {
 		btnSearch.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event)
 			{
-				folderRoute = routeinput.getText();
-				SearchUI sUI = new SearchUI();
+				String folderRoute = routeinput.getText(); 
+				SearchUI sUI = new SearchUI(folderRoute, keywordText.getText());
 				sUI.createUI();
 			}
 		});
@@ -143,10 +145,10 @@ public class OriginalMainUI extends JPanel implements UserInterface {
 	 */
 	private void buildKeyWordPane(JPanel j)
 	{
-		JTextField jf = new JTextField(15);
+		keywordText = new JTextField(15);
 		JLabel jl = new JLabel("Please input key word:");
 		j.add(jl);
-		j.add(jf);
+		j.add(keywordText);
 	}
 	
 	/**
